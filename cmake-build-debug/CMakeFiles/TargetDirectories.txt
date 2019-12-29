@@ -1,0 +1,3 @@
+C:/Users/juang/CLionProjects/oroyecto/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/juang/CLionProjects/oroyecto/cmake-build-debug/CMakeFiles/oroyecto.dir
+C:/Users/juang/CLionProjects/oroyecto/cmake-build-debug/CMakeFiles/edit_cache.dir
