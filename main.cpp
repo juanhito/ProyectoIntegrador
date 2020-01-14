@@ -4,9 +4,9 @@ using namespace std;
 
 string recta1[6], recta2[6], recta3[6];
 int punto1[3], punto2[3], vector1[3], vector2[3],punto3[3],vector3[3];
-string plano1[9],plano2[9],plano3;
-
-
+string plano1[9],plano2[9],plano3[9];
+int suma;
+int plano11[6],plano22[6],plano33[6];
 string pedirRecta(){
     string recta;
     cin >> recta;
@@ -28,65 +28,95 @@ void dosRectas(){
            cin>>ec;
     if(ec==1) {
         int cont = 0;
-        cout<<"primera recta";
-        string recta=pedirRecta();
+        cout<<"Ejemplo= (x,y,z)=(1,2,3)+t(4,5,6)\n";
+        cout << "primera recta";
+        string recta = pedirRecta();
         for (int i = 0; i < recta.length(); i++) {
             if (isdigit(recta[i])) {
                 recta1[cont] = recta[i];
+                suma = stoi(recta1[cont]) * 10;
 
-                if(cont<3){
-                    punto1[cont]=stoi(recta1[cont]);
+                if (isdigit(recta[i + 1])) {
+                    recta1[cont + 1] = recta[i + 1];
+                    suma = suma + stoi(recta1[cont + 1]);
+                    i++;
+                } else {
+                    suma = suma / 10;
                 }
-                else{
-                    vector1[vec]=stoi(recta1[cont]);
+                if (cont < 3) {
+                    punto1[pun] = suma;
+                    pun++;
+                } else {
+                    vector1[vec] = suma;
                     vec++;
                 }
                 cont++;
             }
         }
-        vec=0;
-        cont=0;
-        cout<<"segunda recta";
-        recta=pedirRecta();
+        for (int i = 0; i < 3; i++) {
+            cout << punto1[i] << " ";
+        }
+        cout << "Vector";
+        for (int i = 0; i < 3; i++) {
+            cout << vector1[i] << " ";
+        }
+
+        vec = 0;
+        cont = 0;
+        cout << "segunda recta";
+        recta = pedirRecta();
 
         for (int i = 0; i < recta.length(); i++) {
             if (isdigit(recta[i])) {
                 recta2[cont] = recta[i];
+                suma = stoi(recta2[cont]);
 
-                if(cont<3){
-                    punto2[cont]=stoi(recta2[cont]);
+                if (isdigit(recta[i + 1])) {
+                    recta2[cont + 1] = recta[i + 1];
+                    suma = suma*10 + stoi(recta2[cont + 1]);
+                    i++;
                 }
-                else{
-                    vector2[vec]=stoi(recta2[cont]);
+                if (cont < 3) {
+                    punto2[pun] = suma;
+                    pun++;
+                } else {
+                    vector2[vec] = suma;
                     vec++;
                 }
                 cont++;
             }
+
         }
     }
-
 
     else if(ec==2){
         string ec1,ec2,ec3;
         string ec4,ec5,ec6;
-        cout<<"Primera Recta";
+        cout<<"Ejemplo: \nx=1+3t\ny=1+12t\nz=12+1t\n\n";
+        cout<<"Primera Recta\n";
         cout<<"x=",cin>>ec1;
         cout<<"y=",cin>>ec2;
         cout<<"z=",cin>>ec3;
-        string total=ec1+ec2+ec3;
+        string total=ec1+"b"+ec2+"c"+ec3;
         int cont=0;
         int
         pun=0;
         for (int i = 0; i < total.length(); i++) {
             if (isdigit(total[i])) {
                 recta1[cont] = total[i];
-                punto1[cont];
+                suma = stoi(recta1[cont]);
+
+                if (isdigit(total[i + 1])) {
+                    recta2[cont + 1] = total[i + 1];
+                    suma = suma*10 + stoi(recta2[cont + 1]);
+                    i++;
+                }
                 if(cont%2==0){
-                    punto1[pun]=stoi(recta1[pun]);
+                    punto1[pun]=suma;
                     pun++;
                 }
                 else{
-                    vector1[vec]=stoi(recta1[cont]);
+                    vector1[vec]=suma;
                     vec++;
                 }
                 cont++;
@@ -94,29 +124,43 @@ void dosRectas(){
         }
 
         vec=0;
-        cont=0;
         pun=0;
+
         cout<<"Segunda Recta";
         cout<<"x=",cin>>ec4;
         cout<<"y=",cin>>ec5;
         cout<<"z=",cin>>ec6;
-        total=ec4+ec5+ec6;
+        total=ec4+"a"+ec5+"s"+ec6;
         cont=0;
         for (int i = 0; i < total.length(); i++) {
             if (isdigit(total[i])) {
-                recta2[cont] = total[i];
+                recta2[cont]=total[i];
+                suma = stoi(recta2[cont]);
+
+                if (isdigit(total[i + 1])) {
+                    recta2[cont + 1] = total[i + 1];
+                    suma = suma*10 + stoi(recta2[cont + 1]);
+                    i++;
+                }
 
                 if(cont%2==0){
-                    punto2[pun]=stoi(recta2[pun]);
+                    punto2[pun]=suma;
                     pun++;
                 }
                 else{
-                    vector2[vec]=stoi(recta2[cont]);
+                    vector2[vec]=suma;
                     vec++;
                 }
                 cont++;
             }
 
+        }
+        for(int i=0;i<3;i++){
+            cout<<punto2[i]<<" ";
+        }
+        cout<<"Vector";
+        for(int i=0;i<3;i++){
+            cout<<vector2[i]<<" ";
         }
     }
     else if(ec==3){
@@ -134,11 +178,8 @@ void dosRectas(){
 
 
 }
-
 void DosPlanos(){
     int ecP;
-    int x1,x2,y1,y2,z1,z2;
-    int v1a,v1b,v2a,v2b,v3a,v3b;
     int vectorp1[6],vectorp2[6];
     cout<<"en que ecuacion quieres los planos\n",
             cout<<"1 para vectorial,"
@@ -148,6 +189,7 @@ void DosPlanos(){
     int vec=0;
     int pun=0;
     if(ecP==1){
+        cout<<"Ejemplo: (1,2,3) + t(45,6,7) +s(7,8,9)\n";
         int cont = 0;
         cout<<"primer plano";
 
@@ -155,17 +197,30 @@ void DosPlanos(){
         for (int i = 0; i < plano.length(); i++) {
             if (isdigit(plano[i])) {
                 plano1[cont] = plano[i];
+                suma = stoi(plano1[cont]);
+
+
+                if (isdigit(plano[i + 1])) {
+                    plano1[cont + 1] = plano[i + 1];
+                    suma = suma*10 + stoi(plano1[cont + 1]);
+                    i++;
+                }
 
                 if(cont<3){
-                    punto1[cont]=stoi(plano1[cont]);
+                    punto1[cont]=suma;
+
                 }
                 else {
-                    vectorp2[vec]=stoi(plano1[cont]);
+                    vectorp1[vec]=suma;
                     vec++;
+
+
+
                 }
                 cont++;
             }
         }
+
         vec=0;
         cont=0;
         cout<<"segundo plano";
@@ -174,12 +229,19 @@ void DosPlanos(){
         for (int i = 0; i < plano.length(); i++) {
             if (isdigit(plano[i])) {
                 plano2[cont] = plano[i];
+                suma = stoi(plano2[cont]);
+
+                if (isdigit(plano[i + 1])) {
+                    plano2[cont + 1] = plano[i + 1];
+                    suma = suma*10 + stoi(plano2[cont + 1]);
+                    i++;
+                }
 
                 if(cont<3){
-                    punto2[cont]=stoi(plano2[cont]);
+                    punto2[cont]=suma;
                 }
                 else{
-                    vectorp2[vec]=stoi(plano2[cont]);
+                    vectorp2[vec]=suma;
                     vec++;
                 }
                 cont++;
@@ -191,7 +253,9 @@ void DosPlanos(){
     else if(ecP==2){
         string ec1,ec2,ec3;
         string ec4,ec5,ec6;
-        cout<<"Primer plano";
+        cout<<"Ejemplo: \n\nx=1+3t+2s\ny=1+12t+1s\nz=12+1t+31s\n\n";
+
+        cout<<"Primer plano\n";
         cout<<"x=",cin>>ec1;
         cout<<"y=",cin>>ec2;
         cout<<"z=",cin>>ec3;
@@ -201,13 +265,19 @@ void DosPlanos(){
         for (int i = 0; i < total.length(); i++) {
             if (isdigit(total[i])) {
                 plano1[cont] = total[i];
-                punto1[cont];
+                suma = stoi(plano1[cont]);
+
+                if (isdigit(total[i + 1])) {
+                    plano1[cont + 1] = total[i + 1];
+                    suma = suma*10 + stoi(plano1[cont + 1]);
+                    i++;
+                }
                 if(cont%3==0){
-                    punto1[pun]=stoi(plano1[pun]);
+                    punto1[pun]=suma;
                     pun++;
                 }
                 else{
-                    vectorp1[vec]=stoi(plano1[cont]);
+                    vectorp1[vec]=suma;
                     vec++;
                 }
                 cont++;
@@ -220,7 +290,9 @@ void DosPlanos(){
         for(int i=0;i<6;i++){
             cout<<vectorp1[i];
         }
-        cout<<"Segundo plano ";
+
+        cout<<"Segundo plano\n ";
+
         cout<<"x=",cin>>ec4;
         cout<<"y=",cin>>ec5;
         cout<<"z=",cin>>ec6;
@@ -228,14 +300,22 @@ void DosPlanos(){
         cont=0;
         for (int i = 0; i < total.length(); i++) {
             if (isdigit(total[i])) {
+
                 plano2[cont] = total[i];
+                suma = stoi(plano2[cont]);
+
+                if (isdigit(total[i + 1])) {
+                    plano1[cont + 1] = total[i + 1];
+                    suma = suma*10 + stoi(plano1[cont + 1]);
+                    i++;
+                }
 
                 if(cont%3==0){
-                    punto2[pun]=stoi(plano2[pun]);
+                    punto2[pun]=suma;
                     pun++;
                 }
                 else {
-                    vectorp2[vec]=stoi(plano2[cont]);
+                    vectorp2[vec]=suma;
                     vec++;
                 }
                 cont++;
@@ -244,13 +324,22 @@ void DosPlanos(){
         }
     }
     else if(ecP==3){
+        cout<<"Ejemplo: 2x+1y+12z+3\n";
         cout<<"Primer plano";
         int cont=0;
         int pun=0;
+
         string plano =pedirRecta();
         for (int i = 0; i < plano.length(); i++) {
             if (isdigit(plano[i])) {
                 recta1[cont] = plano[i];
+                suma = stoi(recta1[cont]);
+
+                if (isdigit(plano[i + 1])) {
+                    recta1[cont + 1] = plano[i + 1];
+                    suma = suma*10 + stoi(recta1[cont + 1]);
+                    i++;
+                }
 
 
                 cont++;
@@ -263,6 +352,13 @@ void DosPlanos(){
         for (int i = 0; i < plano.length(); i++) {
             if (isdigit(plano[i])) {
                 recta2[cont] = plano[i];
+                suma = stoi(recta2[cont]);
+
+                if (isdigit(plano[i + 1])) {
+                    recta2[cont + 1] = plano[i + 1];
+                    suma = suma*10 + stoi(recta2[cont + 1]);
+                    i++;
+                }
 
 
                 cont++;
@@ -304,10 +400,197 @@ void DosPlanos(){
 
 
 }
+void RectaPlano() {
+    int ec;
+    int vec = 0;
+    int pun = 0;
+    cout << "en que ecuacion quieres dar las rectas\n",
+            cout << "1 para vectorial,"
+                    "\n2 para parametricas,"
+                    "\n3 para continua ",
+            cin >> ec;
+    if (ec == 1) {
+        int cont = 0;
+
+        cout << "Ejemplo= (x,y,z)=(1,2,3)+t(4,5,6)\n";
+        cout << "primera recta";
+        string recta = pedirRecta();
+        for (int i = 0; i < recta.length(); i++) {
+            if (isdigit(recta[i])) {
+                recta1[cont] = recta[i];
+                suma = stoi(recta1[cont]);
+
+                if (isdigit(recta[i + 1])) {
+                    recta1[cont + 1] = recta[i + 1];
+                    suma = suma*10 + stoi(recta1[cont + 1]);
+                    i++;
+                }
+                if (cont < 3) {
+                    punto1[pun] = suma;
+                    pun++;
+                } else {
+                    vector1[vec] = suma;
+                    vec++;
+                }
+                cont++;
+            }
+        }
+        for (int i = 0; i < 3; i++) {
+            cout << punto1[i] << " ";
+        }
+        cout << "Vector";
+        for (int i = 0; i < 3; i++) {
+            cout << vector1[i] << " ";
+        }
+        cont = 0;
+        cout << "Ejemplo: (1,2,3) + t(45,6,7) +s(7,8,9)\n";
+        cout << "Plano";
+        vec=0;
+        string plano = pedirRecta();
+        for (int i = 0; i < plano.length(); i++) {
+            if (isdigit(plano[i])) {
+                plano1[cont] = plano[i];
+                suma = stoi(plano1[cont]);
+
+
+                if (isdigit(plano[i + 1])) {
+                    plano1[cont + 1] = plano[i + 1];
+                    suma = suma * 10 + stoi(plano1[cont + 1]);
+                    i++;
+                }
+
+                if(cont<3) {
+                    punto2[cont] = suma;
+                } else{
+                    plano11[vec] = suma;
+                    vec++;
+                }
+                cont++;
+        }
+
+
+
+        }
+        int a1,b1,c1,d1;
+        a1 = calcular(plano11[2], plano11[5], plano11[4], plano11[2]);
+        b1 = calcular(plano11[4], plano11[1], plano11[0], plano11[5]);
+        c1 = calcular(plano11[0], plano11[2], plano11[3], plano11[1]);
+        d1 = (-punto2[0] * a1) - (punto2[1] * b1) - (punto2[2] * c1);
+
+        int p=a1*punto1[0]+b1*punto1[1]+c1*punto1[2]+d1;
+        int q=a1*vector1[0]+b1*vector1[1]+c1*vector1[2];
+        if(q==0){
+            if(p==0){
+                cout<<"la recta esta contenida en el plano";
+            }
+            else{
+                cout<<"La recta y el plano son paralelos";
+            }
+        }
+        else{
+            cout<<"se cortan en un punto";
+
+        }
+
+
+
+    } else if (ec == 2) {
+        string ec1, ec2, ec3;
+        string ec4, ec5, ec6;
+        int vectorp1[6];
+        cout << "Ejemplo: \nx=1+3t\ny=1+12t\nz=12+1t\n\n";
+        cout << "Primera Recta\n";
+        cout << "x=", cin >> ec1;
+        cout << "y=", cin >> ec2;
+        cout << "z=", cin >> ec3;
+        string total = ec1 + "b" + ec2 + "c" + ec3;
+        int cont = 0;
+        int pun = 0;
+        for (int i = 0; i < total.length(); i++) {
+            if (isdigit(total[i])) {
+                recta1[cont] = total[i];
+                suma = stoi(recta1[cont]);
+
+                if (isdigit(total[i + 1])) {
+                    recta2[cont + 1] = total[i + 1];
+                    suma = suma * 10 + stoi(recta2[cont + 1]);
+                    i++;
+                }
+                if (cont % 2 == 0) {
+                    punto1[pun] = suma;
+                    pun++;
+                } else {
+                    vector1[vec] = suma;
+                    vec++;
+                }
+                cont++;
+            }
+        }
+
+        cout<<"Ejemplo: \n\nx=1+3t+2s\ny=1+12t+1s\nz=12+1t+31s\n\n";
+
+        cout<<"Primer plano\n";
+        cout<<"x=",cin>>ec1;
+        cout<<"y=",cin>>ec2;
+        cout<<"z=",cin>>ec3;
+        total=ec1+" "+ec2+" "+ec3+" ";
+        cont=0;
+        pun=0;
+        vec=0;
+        for (int i = 0; i < total.length(); i++) {
+            if (isdigit(total[i])) {
+                plano1[cont] = total[i];
+                suma = stoi(plano1[cont]);
+
+                if (isdigit(total[i + 1])) {
+                    plano1[cont + 1] = total[i + 1];
+                    suma = suma*10 + stoi(plano1[cont + 1]);
+                    i++;
+                }
+                if(cont%3==0){
+                    punto2[pun]=suma;
+                    pun++;
+                }
+                else{
+                    vectorp1[vec]=suma;
+                    vec++;
+                }
+                cont++;
+            }
+        }
+        for(int i;i<6;i++){
+            cout<<vectorp1[i];
+        }
+
+
+
+
+
+    }
+    int a1,b1,c1,d1;
+    a1 = calcular(plano11[2], plano11[5], plano11[4], plano11[2]);
+    b1 = calcular(plano11[4], plano11[1], plano11[0], plano11[5]);
+    c1 = calcular(plano11[0], plano11[2], plano11[3], plano11[1]);
+    d1 = (-punto2[0] * a1) - (punto2[1] * b1) - (punto2[2] * c1);
+
+    int p=a1*punto1[0]+b1*punto1[1]+c1*punto1[2]+d1;
+    int q=a1*vector1[0]+b1*vector1[1]+c1*vector1[2];
+    if(q==0){
+        if(p==0){
+            cout<<"la recta esta contenida en el plano";
+        }
+        else{
+            cout<<"La recta y el plano son paralelos";
+        }
+    }
+    else{
+        cout<<"se cortan en un punto";
+
+    }
+
+}
 void tresPlanos() {
     int ecP;
-    int x1,x2,y1,y2,z1,z2;
-    int v1a,v1b,v2a,v2b,v3a,v3b;
     int vectorp1[6],vectorp2[6],vectorp3[6];
     cout<<"en que ecuacion quieres los planos\n",
             cout<<"1 para vectorial,"
@@ -318,18 +601,28 @@ void tresPlanos() {
     int pun=0;
     if(ecP==1){
         int cont = 0;
+        cout<<"Ejemplo: (1,2,3) + t(45,6,7) +s(7,8,9)\n";
         cout<<"primer plano";
+
 
         string plano=pedirRecta();
         for (int i = 0; i < plano.length(); i++) {
             if (isdigit(plano[i])) {
+
                 plano1[cont] = plano[i];
+                suma = stoi(plano1[cont]);
+
+                if (isdigit(plano[i + 1])) {
+                    plano1[cont + 1] = plano[i + 1];
+                    suma = suma*10 + stoi(plano1[cont + 1]);
+                    i++;
+                }
 
                 if(cont<3){
-                    punto1[cont]=stoi(plano1[cont]);
+                    punto1[cont]=suma;
                 }
                 else {
-                    vectorp2[vec]=stoi(plano1[cont]);
+                    vectorp2[vec]=suma;
                     vec++;
                 }
                 cont++;
@@ -343,12 +636,19 @@ void tresPlanos() {
         for (int i = 0; i < plano.length(); i++) {
             if (isdigit(plano[i])) {
                 plano2[cont] = plano[i];
+                suma = stoi(plano2[cont]);
+
+                if (isdigit(plano[i + 1])) {
+                    plano2[cont + 1] = plano[i + 1];
+                    suma = suma*10 + stoi(plano2[cont + 1]);
+                    i++;
+                }
 
                 if(cont<3){
-                    punto2[cont]=stoi(plano2[cont]);
+                    punto2[cont]=suma;
                 }
                 else{
-                    vectorp2[vec]=stoi(plano2[cont]);
+                    vectorp2[vec]=suma;
                     vec++;
                 }
                 cont++;
@@ -360,12 +660,19 @@ void tresPlanos() {
         for (int i = 0; i < plano.length(); i++) {
             if (isdigit(plano[i])) {
                 plano3[cont] = plano[i];
+                suma = stoi(plano3[cont]);
+
+                if (isdigit(plano[i + 1])) {
+                    plano3[cont + 1] = plano[i + 1];
+                    suma = suma*10 + stoi(plano3[cont + 1]);
+                    i++;
+                }
 
                 if(cont<3){
-                    punto3[cont]=stoi(plano3[cont]);
+                    punto3[cont]=suma;
                 }
                 else{
-                    vectorp3[vec]=stoi(plano3[cont]);
+                    vectorp3[vec]=suma;
                     vec++;
                 }
                 cont++;
@@ -378,7 +685,9 @@ void tresPlanos() {
         string ec1,ec2,ec3;
         string ec4,ec5,ec6;
         string ec7,ec8,ec9;
-        cout<<"Primer plano";
+        cout<<"Ejemplo: \n\nx=1+3t+2s\ny=1+12t+1s\nz=12+1t+31s\n\n";
+
+        cout<<"Primer plano\n";
         cout<<"x=",cin>>ec1;
         cout<<"y=",cin>>ec2;
         cout<<"z=",cin>>ec3;
@@ -388,23 +697,27 @@ void tresPlanos() {
         for (int i = 0; i < total.length(); i++) {
             if (isdigit(total[i])) {
                 plano1[cont] = total[i];
+                suma = stoi(plano1[cont]);
+
+                if (isdigit(total[i + 1])) {
+                    plano1[cont + 1] = total[i + 1];
+                    suma = suma*10 + stoi(plano1[cont + 1]);
+                    i++;
+                }
                 punto1[cont];
                 if(cont%3==0){
-                    punto1[pun]=stoi(plano1[pun]);
+                    punto1[pun]=suma;
                     pun++;
                 }
                 else{
-                    vectorp1[vec]=stoi(plano1[cont]);
+                    vectorp1[vec]=suma;
                     vec++;
                 }
                 cont++;
             }
         }
-
         vec=0;
-        cont=0;
         pun=0;
-
         cout<<"Segundo plano ";
         cout<<"x=",cin>>ec4;
         cout<<"y=",cin>>ec5;
@@ -414,13 +727,20 @@ void tresPlanos() {
         for (int i = 0; i < total.length(); i++) {
             if (isdigit(total[i])) {
                 plano2[cont] = total[i];
+                suma = stoi(plano2[cont]);
+
+                if (isdigit(total[i + 1])) {
+                    plano2[cont + 1] = total[i + 1];
+                    suma = suma*10 + stoi(plano2[cont + 1]);
+                    i++;
+                }
 
                 if(cont%3==0){
-                    punto2[pun]=stoi(plano2[pun]);
+                    punto2[pun]=suma;
                     pun++;
                 }
                 else {
-                    vectorp2[vec]=stoi(plano2[cont]);
+                    vectorp2[vec]=suma;
                     vec++;
                 }
                 cont++;
@@ -434,18 +754,24 @@ void tresPlanos() {
         cout<<"x=",cin>>ec7;
         cout<<"y=",cin>>ec8;
         cout<<"z=",cin>>ec9;
-        string totalp3=ec7+ec8+ec9;
+        total=ec7+ec8+ec9;
 
         for (int i = 0; i < total.length(); i++) {
             if (isdigit(total[i])) {
                 plano3[cont] = total[i];
-                punto3[cont];
+                suma = stoi(plano3[cont]);
+
+                if (isdigit(total[i + 1])) {
+                    recta2[cont + 1] = total[i + 1];
+                    suma = suma*10 + stoi(plano3[cont + 1]);
+                    i++;
+                }
                 if(cont%3==0){
-                    punto3[pun]=stoi(plano3[pun]);
+                    punto3[pun]=suma;
                     pun++;
                 }
                 else{
-                    vectorp3[vec]=stoi(plano3[cont]);
+                    vectorp3[vec]=suma;
                     vec++;
                 }
                 cont++;
@@ -455,58 +781,96 @@ void tresPlanos() {
 
     }
     else if(ecP==3){
+        cout<<"Ejemplo: 2x+1y+12z+3\n";
+
         cout<<"Primer plano";
         int cont=0;
         int pun=0;
         string plano =pedirRecta();
         for (int i = 0; i < plano.length(); i++) {
             if (isdigit(plano[i])) {
-                recta1[cont] = plano[i];
+                recta1[cont]=plano[i];
+                if(isdigit(plano[i+1])){
 
 
+                    recta1[cont + 1] = plano[i + 1];
+
+                    suma=stoi(recta1[cont])*10+stoi(recta1[cont+1]);
+                    plano11[cont]=suma;
+                    i++;
+                }
+                else{
+                    plano11[cont] = stoi(recta1[cont]);
+                }
                 cont++;
             }
         }
         cout<<"Segundo plano";
         cont=0;
         pun=0;
+        suma=0;
         plano =pedirRecta();
         for (int i = 0; i < plano.length(); i++) {
             if (isdigit(plano[i])) {
-                recta2[cont] = plano[i];
+                recta2[cont]=plano[i];
+                if(isdigit(plano[i+1])){
 
 
+                    recta2[cont + 1] = plano[i + 1];
+
+                    suma=stoi(recta2[cont])*10+stoi(recta2[cont+1]);
+                    plano22[cont]=suma;
+                    i++;
+                }
+                else{
+                    plano22[cont] = stoi(recta2[cont]);
+                }
                 cont++;
             }
         }
         cout<<"Tercer plano";
-        int cont=0;
-        int pun=0;
-        string plano =pedirRecta();
+        cont=0;
+        pun=0;
+        suma=0;
+        int i=0;
+        plano =pedirRecta();
         for (int i = 0; i < plano.length(); i++) {
             if (isdigit(plano[i])) {
-                recta3[cont] = plano[i];
+                recta3[cont]=plano[i];
+                if(isdigit(plano[i+1])){
 
 
+                    recta3[cont + 1] = plano[i + 1];
+
+                    suma=stoi(recta3[cont])*10+stoi(recta3[cont+1]);
+                    plano33[cont]=suma;
+                    i++;
+                }
+                else{
+                    plano33[cont] = stoi(recta3[cont]);
+                }
                 cont++;
             }
         }
 
+
+
     }
     int a1,a2,b1,b2,c1,c2,d1,d2,a3,b3,c3,d3;
     if(ecP==3){
-        a1=stoi(recta1[0]);
-        b1=stoi(recta1[1]);
-        c1=stoi(recta1[2]);
-        d1=stoi(recta1[3]);
-        a2=stoi(recta2[0]);
-        b2=stoi(recta2[1]);
-        c2=stoi(recta2[2]);
-        d2=stoi(recta2[3]);
-        a3=stoi(recta3[0]);
-        b3=stoi(recta3[1]);
-        c3=stoi(recta3[2]);
-        d3=stoi(recta3[3]);
+        a1=plano11[0];
+        b1=plano11[1];
+        c1=plano11[2];
+        d1=plano11[3];
+        a2=plano22[0];
+        b2=plano22[1];
+        c2=plano22[2];
+        d2=plano22[3];
+        a3=plano33[0];
+        b3=plano33[1];
+        c3=plano33[2];
+        d3=plano33[3];
+        cout<<a1<<" "<<b1<<" "<<c1<<" "<<d1<<" "<<a2<<" "<<b2<<" "<<c2<<" "<<d2<<" "<<a3<<" "<<b3<<" "<<c3<<" "<<d3;
 
 
 
@@ -535,35 +899,23 @@ void tresPlanos() {
 
 
 }
-
-
-
-
-
-
-
-
 int main() {
 
     int n;
-    cout<<"1 para 2 rectas,"
-          "\n2 para 2 planos,"
-          "\n3 para plano y recta, "
-          "\n4 para 3 planos ",
-            cin>>n;
+    cout << "1 para 2 rectas,"
+            "\n2 para 2 planos,"
+            "\n3 para plano y recta, "
+            "\n4 para 3 planos ",
+            cin >> n;
 
-    if(n==1){
+    if (n == 1) {
         dosRectas();
 
-    }
-    else if(n==2){
+    } else if (n == 2) {
         DosPlanos();
-    }
-    else if(n==3){
-
-    }
-
-    else if(n==4){
+    } else if (n == 3) {
+        RectaPlano();
+    } else if (n == 4) {
         tresPlanos();
     }
 }
